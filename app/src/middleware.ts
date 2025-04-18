@@ -8,17 +8,20 @@ export async function middleware(request: NextRequest) {
     },
   })
 
+  // Get the cookies from the request
+  const cookieStore = request.cookies
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
         get(name: string) {
-          return request.cookies.get(name)?.value
+          return cookieStore.get(name)?.value
         },
         set(name: string, value: string, options: CookieOptions) {
-          // If the cookie is updated, update the request for downstream processing
-          request.cookies.set({
+          // If the cookie is updated, update both request and response cookies
+          cookieStore.set({
             name,
             value,
             ...options,
@@ -30,17 +33,9 @@ export async function middleware(request: NextRequest) {
           })
         },
         remove(name: string, options: CookieOptions) {
-          // If the cookie is removed, update the request for downstream processing
-          request.cookies.set({
-            name,
-            value: '',
-            ...options,
-          })
-          response.cookies.set({
-            name,
-            value: '',
-            ...options,
-          })
+          // If the cookie is removed, update both request and response cookies
+          cookieStore.delete(name)
+          response.cookies.delete(name)
         },
       },
     }

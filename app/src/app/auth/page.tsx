@@ -18,7 +18,9 @@ export default function AuthPage() {
     if (error) {
       setErrorMessage('Authentication error occurred. Please try again.')
     }
-    
+  }, [searchParams])
+
+  useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session) {
         // User is logged in, redirect to home or dashboard
