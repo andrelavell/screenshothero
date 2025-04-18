@@ -1,16 +1,15 @@
 import Link from 'next/link'
 
-// Define a type for the page props, specifically for searchParams
-interface AuthErrorPageProps {
-  searchParams: { 
-    message?: string | string[] | undefined;
-  };
-}
-
-export default function AuthErrorPage({ searchParams }: AuthErrorPageProps) {
+export default function AuthErrorPage({ 
+  searchParams 
+}: { 
+  searchParams: { [key: string]: string | string[] | undefined } 
+}) {
   // Handle potential array case for searchParams, though 'message' is likely a string
   const messageParam = searchParams.message;
-  const errorMessage = typeof messageParam === 'string' ? messageParam : 'An unexpected error occurred during authentication.';
+  const errorMessage = typeof messageParam === 'string' 
+    ? messageParam 
+    : 'An unexpected error occurred during authentication.';
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center px-4">
