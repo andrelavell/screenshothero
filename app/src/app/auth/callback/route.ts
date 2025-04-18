@@ -37,6 +37,6 @@ export async function GET(request: Request) {
     console.error('[Auth Callback] No code found in search params.')
   }
 
-  // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/auth-error?message=Could not exchange code for session`)
+  // Redirect to the main auth page with an error parameter instead of a dedicated error page
+  return NextResponse.redirect(`${origin}/auth?error=auth_callback_error`)
 }
