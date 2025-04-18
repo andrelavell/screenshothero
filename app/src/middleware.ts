@@ -13,6 +13,7 @@ export async function middleware(request: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         get(name: string) {
           return request.cookies.get(name)?.value
         },
@@ -34,6 +35,7 @@ export async function middleware(request: NextRequest) {
           request.cookies.delete(name)
           response.cookies.delete(name)
         },
+        /* eslint-enable @typescript-eslint/no-unused-vars */
       },
     }
   )
