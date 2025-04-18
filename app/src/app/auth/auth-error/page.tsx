@@ -6,13 +6,18 @@ type AuthErrorPageProps = {
 };
 
 const AuthErrorPage: React.FC<AuthErrorPageProps> = ({ searchParams }) => {
-  // --- TEMPORARILY COMMENTED OUT FOR DEBUGGING ---
-  // Handle potential array case for searchParams, though 'message' is likely a string
-  // const messageParam = searchParams.message;
-  // const errorMessage = typeof messageParam === 'string' 
-  //   ? messageParam 
-  //   : 'An unexpected error occurred during authentication.';
-  const errorMessage = "An error occurred (debugging)." // Temporary placeholder
+  // --- Restoring searchParams usage ---
+  // Handle potential array case for searchParams
+  const messageParam = searchParams.message;
+  let errorMessage = 'An unexpected error occurred during authentication.'; // Default message
+
+  if (typeof messageParam === 'string') {
+    errorMessage = messageParam;
+  } else if (Array.isArray(messageParam) && messageParam.length > 0) {
+    // If it's an array, take the first element (though unlikely for 'message')
+    errorMessage = messageParam[0]; 
+  }
+  // If messageParam is undefined or an empty array, the default message remains
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center px-4">
