@@ -1,10 +1,11 @@
 import Link from 'next/link'
+import React from 'react'; 
 
-export default function AuthErrorPage({ 
-  searchParams 
-}: { 
-  searchParams: { [key: string]: string | string[] | undefined } 
-}) {
+type AuthErrorPageProps = {
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+const AuthErrorPage: React.FC<AuthErrorPageProps> = ({ searchParams }) => {
   // Handle potential array case for searchParams, though 'message' is likely a string
   const messageParam = searchParams.message;
   const errorMessage = typeof messageParam === 'string' 
@@ -22,5 +23,7 @@ export default function AuthErrorPage({
         </span>
       </Link>
     </div>
-  )
-}
+  );
+};
+
+export default AuthErrorPage;
