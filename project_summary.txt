@@ -1,0 +1,118 @@
+# ScreenshotHero - Project Summary
+
+## Overview
+ScreenshotHero is a web application that allows users to upload screenshots and edit the text within them while matching fonts very closely to the original. The app will be mobile-friendly first, as most users will be uploading screenshots from their phones. The application will also support additional features like removing objects/logos, enhancing images, and translating text.
+
+## Core Functionality
+1. Screenshot Upload
+   - Users can upload screenshots from their devices
+
+2. Text Editing
+   - Detect text in screenshots using OCR
+   - Allow users to select text and replace it
+   - Match font styles, sizes, and positioning very precisely
+   - Provide tools to adjust position, font style, color, size, etc.
+   - Provide a "Compare" feature to overlay edited text with original
+
+3. Additional Key Features
+   - Screenshot Enhancement (denoising, sharpening, color correction, light/dark mode conversion, stitching)
+   - Object/Logo Removal using AI-powered inpainting
+   - Multi-language Support (OCR in multiple languages, automatic translation, preserved formatting)
+
+## Technical Stack
+- Frontend: Next.js with TypeScript
+- Backend/Auth/Database: Supabase
+- Image Processing: Tesseract.js for OCR, Fabric.js/Konva.js for canvas manipulation
+- Font Matching: Fontkit library, curated web fonts
+- Payments: Stripe integration
+- Deployment: Vercel (preferred over Render for Next.js optimization)
+
+## User Flow & Authentication
+- **Anonymous Access:** Users can visit the main page (or landing page later), upload a screenshot, and use the editing tools without needing to log in or register.
+- **Login Trigger:** Authentication (login/signup) is required *only* when the user attempts to download the final edited image, potentially to remove a watermark or access premium features.
+- **Post-Login:** After successful login/signup triggered by the download action, the user's work should ideally be associated with their account, and the download should proceed.
+- User signup/login via Supabase
+- Stripe integration for processing payments
+- Potential subscription model for premium features
+
+## Action Plan Roadmap
+
+### Phase 1: Project Setup & Basic Infrastructure (1-2 weeks)
+- [ ] Set up Next.js project with TypeScript
+- [ ] Configure Supabase for authentication and database
+- [ ] Set up Vercel deployment pipeline
+- [ ] Create basic responsive UI components
+- [ ] Implement user authentication flow
+
+### Phase 2: Core Screenshot Upload & Analysis (2-3 weeks)
+- [ ] Implement screenshot upload functionality
+- [ ] Set up image storage in Supabase
+- [ ] Implement OCR using Tesseract.js
+- [ ] Create text region detection algorithm
+- [ ] Build basic text selection interface
+
+### Phase 3: Text Editing Capabilities (3-4 weeks)
+- [ ] Develop canvas-based text editing system
+- [ ] Implement font detection/matching capabilities
+- [ ] Create position adjustment controls
+- [ ] Build the font style configuration UI
+- [ ] Implement "Compare" functionality
+
+### Phase 4: Enhanced Features (2-3 weeks)
+- [ ] Implement screenshot enhancement features
+   - [ ] Image quality improvement
+   - [ ] Color correction 
+   - [ ] Theme changing
+   - [ ] Screenshot stitching
+- [ ] Develop object/logo removal capabilities
+   - [ ] AI-powered inpainting
+   - [ ] Smart area selection
+
+### Phase 5: Multi-language Support (2 weeks)
+- [ ] Extend OCR to support multiple languages
+- [ ] Implement automatic translation
+- [ ] Ensure formatting preservation during translation
+
+### Phase 6: Payment Integration & User Management (1-2 weeks)
+- [ ] Set up Stripe payment processing
+- [ ] Create subscription tiers and plans
+- [ ] Implement usage limits for free vs. paid tiers
+
+### Phase 7: Testing, Optimization & Launch (2-3 weeks)
+- [ ] Comprehensive testing across devices
+- [ ] Performance optimization
+- [ ] Security auditing
+- [ ] Beta testing with select users
+- [ ] Official launch
+
+## Technical Challenges
+1. Precise font matching from raster images
+2. Accurate text positioning and styling
+3. Object removal with natural background filling
+4. Mobile-friendly UI for detailed editing operations
+5. Processing large images efficiently in the browser
+
+## Project Structure Considerations
+
+- The backend will be developed first to handle all core API, authentication, image processing, and database logic.
+- The project will be organized to easily support a future public-facing landing page, which will be developed as a separate module or directory.
+- Example directory structure:
+
+```
+/ScreenshotHero
+  /backend         # All API, serverless functions, Supabase integration, Stripe, etc.
+  /app             # Main web app (user dashboard, screenshot editor, etc.)
+  /landing-page    # Public marketing/landing page (to be built in the future)
+  /shared          # Shared utilities, types, or assets
+  /docs            # Documentation and project planning
+```
+
+## Future Expansion Possibilities
+1. Collaboration features
+2. Templates and presets
+3. Integration with design tools
+4. AI-suggested edits
+5. Branded overlay options
+6. Tutorial creation tools
+
+This roadmap provides a structured approach to building ScreenshotHero, starting with core functionality and progressively adding more advanced features.
