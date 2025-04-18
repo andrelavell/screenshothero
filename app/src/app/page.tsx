@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image"; // Removed unused import
 
 export default async function Home() {
   return (
